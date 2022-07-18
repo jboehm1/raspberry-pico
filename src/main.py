@@ -1,10 +1,13 @@
 import utime #TODO : compare with "time"
 import pico_tools
+import time
 
 oled_display = pico_tools.InitOled()
 sensor_temp = pico_tools.InitTempSensor()
 led = pico_tools.InitLed()
 servo = pico_tools.InitPwm()
+
+
 #while True:
  #   pico_tools.MoveText(oled_display, "test", 0, 64, 0, 64)
 
@@ -13,10 +16,34 @@ def main():
     while run:
         #pico_tools.DrawRect(oled_display, 20,20, 60, 20)
         #pico_tools.DrawFilledRect(oled_display, 20,20,60,20,0.9)
-        for progress in range(100):
-            pico_tools.DrawProgressBarDoted(oled_display, 20,20, 60, 30, progress/100, 3, 1, 2, 2)
+        #pico_tools.DrawFilledRect2(oled_display, 20,20,50,20)
+       # pico_tools.DispPlot(oled_display)
+        
+        start = time.ticks_ms()
+        for progress in range(101):
+            pico_tools.DrawProgressBar2(oled_display, 20,20, 60, 30, progress/100)
+            oled_display.text(" {:2.0f}%".format(progress), 80, 50, 1)
+            
             oled_display.show()
-          
+            oled_display.fill(0)
+
+        print("first loop ", time.ticks_ms() - start )
+        
+        utime.sleep(5)
+        oled_display.fill(0)
+        
+        start = time.ticks_ms()
+        for progress in range(101):
+            pico_tools.DrawProgressBar(oled_display, 20,20, 60, 30, progress/100)
+            oled_display.text(" {:2.0f}%".format(progress), 80, 50, 1)
+
+            oled_display.show()
+            oled_display.fill(0)
+
+        print("second loop ", time.ticks_ms() - start )
+
+        utime.sleep(5)
+        
         temp = pico_tools.ReadTemp(sensor_temp)
         ratio = (temp - 16 )/4
         servo.duty_u16( int(ratio * 65535) )
