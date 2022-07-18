@@ -25,26 +25,32 @@ def InitOled():
     i2c=I2C(0,scl=Pin(17),sda=Pin(16),freq=200000)
     return SSD1306_I2C(WIDTH,HEIGHT,i2c)
 
+#increment > 1 will lead to doted line :)
 def DrawLine(oled_display, start_line_x=0, start_line_y=0, stop_line_x=50, stop_line_y=20, increment=1):
-    for x in range(start_line_x, stop_line_x, increment):
-        for y in range(start_line_y, stop_line_y, increment):
+    for x in range(start_line_x, stop_line_x+1, increment):
+        for y in range(start_line_y, stop_line_y+1, increment):
             oled_display.pixel(x, y, 1)
             
-def DrawRect(oled_display, x, y, width, height):
-    DrawLine(oled_display, x, y, x+width, y)
-    DrawLine(oled_display, x, y, x, y+height)
-    DrawLine(oled_display, x+width, y, x+width, y+height)
-    DrawLine(oled_display, x, y+height, x+width, y+height)
+#increment > 1 will lead to doted rect :)            
+def DrawRect(oled_display, x, y, width, height, increment=1):
+    DrawLine(oled_display, x, y, x+width, y, increment)
+    DrawLine(oled_display, x, y, x, y+height, increment)
+    DrawLine(oled_display, x+width, y, x+width, y+height, increment)
+    DrawLine(oled_display, x, y+height, x+width, y+height, increment)
     
-#def DrawFilledRect():    
+def DrawFilledRect(oled_display, x, y, width, height, increment_y=1, increment_x=1):
+    for y in range(y, y+height+1,increment_y) :
+        DrawLine(oled_display, x, y, x+width+increment_x, y, increment_x)
     
-def ProgressBar(oled_display, progress=0.5, x=0, y=0, width=50, height=20):
-    pass
-    
-    
-    
-    
-    
+#Border is distance between outter rect and filled rect
+def DrawProgressBarDoted(oled_display, x, y, width, height, progress=0.5, border=3, increment_rect=1,increment_x=1, increment_y=1):
+    DrawRect(oled_display, x, y, width, height, increment_rect)
+    DrawFilledRect(oled_display, x+border, y+border, int(progress*width)-2*border, height-2*border, increment_x, increment_y)   
+
+def DrawProgressBar(oled_display, x, y, width, height, progress=0.5, border=3):
+    DrawRect(oled_display, x, y, width, height)
+    DrawFilledRect(oled_display, x+border, y+border, int(progress*width)-2*border, height-2*border)   
+
 def DispOled(oled_display, text, x=0, y=0, clean=True):
     if clean:
         oled_display.fill(0)
@@ -60,7 +66,7 @@ def DispOled(oled_display, text, x=0, y=0, clean=True):
     #utime.sleep(0.2)
  
 def MoveText(oled_display, text, x_start=0, x_stop=128, y_start=0, y_stop=256, speed=1):
-    print (max(x_stop-x_start, y_stop-y_start) )
+    #print (max(x_stop-x_start, y_stop-y_start) )
     y_list=range(y_start, y_stop, speed)
     y_list_inv=range(y_stop, y_start, -speed)
     x_list = range(x_start, x_stop, 1)
