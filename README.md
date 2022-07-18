@@ -25,6 +25,7 @@ Getting familiar with the hardware and software. Implementation of a python tool
 ```
 code blocks for commands
 ```
+<img src="raspberry-pi-pico-gpio.png" align="right" width="500" height="300"/>
 
 ## Help
 
