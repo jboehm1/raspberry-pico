@@ -51,7 +51,8 @@ Jean Boehm [@jboehm1](https://github.com/jboehm1) All rights reserved
 
 This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
 
-## Acknowledgments
+## Ressources
 
 Inspiration, code snippets, etc.
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+* [build a weather station with pico](https://www.youtube.com/watch?v=vfp0B1IW7yI&list=LL&index=2&ab_channel=WexterHome) ( using "def" and main() )
+* [Easy intro course to pico](https://www.electroniclinic.com/raspberry-pi-pico-rp2040-programming-in-micropython-with-examples/)
