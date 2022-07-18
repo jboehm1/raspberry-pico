@@ -17,6 +17,7 @@ Getting familiar with the hardware and software. Implementation of a python tool
 
 1. Press the boot button on the rapsberry pico and plug in to computer
 2. Copy the binary on the device
+3. Use instructions from [Bibliography(2.)](https://www.electroniclinic.com/raspberry-pi-pico-rp2040-programming-in-micropython-with-examples/) to install modules if needed (OLED Display eg.)
 
 ### Executing program
 
@@ -25,11 +26,16 @@ Getting familiar with the hardware and software. Implementation of a python tool
 ```
 code blocks for commands
 ```
+
+### Hardware setup
+
+* See figure bellow to use the correct pins:
 <img src="raspberry-pi-pico-gpio.png" width="500" height="300"/>
 
 ## Help
 
-Any advise for common problems or issues.
+Advise for common issues:
+- issue with oled display: make sure the i1c wires are connected to the right outputs
 ```
 command to run if program contains helper info
 ```
@@ -55,5 +61,5 @@ This project is licensed under the [NAME HERE] License - see the LICENSE.md file
 ## Bibliography
 
 Inspiration, code snippets, etc.
-* [build a weather station with pico](https://www.youtube.com/watch?v=vfp0B1IW7yI&list=LL&index=2&ab_channel=WexterHome) ( using "def" and main() )
-* [Easy intro course to pico](https://www.electroniclinic.com/raspberry-pi-pico-rp2040-programming-in-micropython-with-examples/)
+1. [Build a weather station with pico](https://www.youtube.com/watch?v=vfp0B1IW7yI&list=LL&index=2&ab_channel=WexterHome) ( using "def" and main() )
+2. [Easy intro course to pico](https://www.electroniclinic.com/raspberry-pi-pico-rp2040-programming-in-micropython-with-examples/)
