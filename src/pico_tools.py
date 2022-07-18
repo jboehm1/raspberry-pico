@@ -3,6 +3,7 @@ from ssd1306 import SSD1306_I2C
 import utime
 from oled import Write, GFX, SSD1306_I2C
 from oled.fonts import ubuntu_mono_15, ubuntu_mono_20
+import math
 
 #servo.freq(50)
 def InitPwm(pin=0):
@@ -42,7 +43,7 @@ def DrawFilledRect(oled_display, x, y, width, height, increment_y=1, increment_x
     for y in range(y, y+height+1,increment_y) :
         DrawLineOrRect(oled_display, x, y, x+width+increment_x, y, increment_x)
         
-def DrawFilledRect2(oled_display, x, y, width, height, increment_y=1, increment_x=1):
+def DrawFilledRect2(oled_display, x, y, width, height, increment_y=1, increment_x=2):
     DrawLineOrRect(oled_display, x, y, x+width+increment_x, y+height, increment_x)
 
 #Border is distance between outter rect and filled rect
@@ -72,16 +73,39 @@ def DispOled(oled_display, text, x=0, y=0, clean=True):
     oled_display.show()
     #utime.sleep(0.2)
 
-def CreatePlot(y_plot, value):
-    if len(y_plot)<110:
-        y_plot.append(value)
+def CreateY_plot(y_plot, value, height=50, min_y=20, max_y=28, autoScale=True ):
+    if autoScale:
+        #value = (value - min(y_plot))* ( min(y_plot)/max(y_plot) )
+        #value = (value - 24)* ( 24/28 )
+        print(value)
+    if len(y_plot)<120:
+        #y_plot.append(int ((1-value) * height) )
+        y_plot.append(int (value*2) )
     else:
         del y_plot[0]
-        y_plot.append(value)
+        #y_plot.append( int((1-value) * height) )
+        y_plot.append(int (value*2) )
+        
+def CreateSine(oled_display, factor=1.5):
+    for k in range(120):
+        oled_display.pixel(k, int(25*(math.cos(factor * k/10) +1) ), 1)
+        
+def CreateYplotCosine(y_plot, value, height=50, min_y=20, max_y=28):
+    if len(y_plot)<110:
+        #y_plot.append(int ((1-value) * height) )
+        y_plot.append(int (value*2) )
+    else:
+        del y_plot[0]
+        #y_plot.append( int((1-value) * height) )
+        y_plot.append(int (value*2) )
+    
     
 def DispPlot(oled_display, y_plot=[], x_min=5, x_max=50, y_min=5, y_max=110):
-    DrawLineOrRect(oled_display, x_min, y_max, x_max, y_max) #x-axis
-    DrawLineOrRect(oled_display, x_min, y_min, x_max, y_max) #y-axis
+    #DrawLineOrRect(oled_display, x_min, y_max, x_max, y_max) #x-axis
+    #DrawLineOrRect(oled_display, x_min, y_min, x_max, y_max) #y-axis
+    for ind, y in enumerate(y_plot):
+        oled_display.pixel(ind, int(y), 1)
+        #print(ind, int(y))
     
 def MoveText(oled_display, text, x_start=0, x_stop=128, y_start=0, y_stop=256, speed=1):
     #print (max(x_stop-x_start, y_stop-y_start) )

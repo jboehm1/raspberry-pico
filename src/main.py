@@ -13,12 +13,28 @@ servo = pico_tools.InitPwm()
 
 def main():
     run = True
+    y_plot=[pico_tools.ReadTemp(sensor_temp)]
     while run:
+        for k in range(100):
+            oled_display.fill(0)
+
+            pico_tools.CreateSine(oled_display, k*2/100)
+            oled_display.show()
+
+        utime.sleep(10)
         #pico_tools.DrawRect(oled_display, 20,20, 60, 20)
         #pico_tools.DrawFilledRect(oled_display, 20,20,60,20,0.9)
         #pico_tools.DrawFilledRect2(oled_display, 20,20,50,20)
-       # pico_tools.DispPlot(oled_display)
+        for k in range(200):
+            temp = pico_tools.ReadTemp(sensor_temp)
+            print(temp)
+            pico_tools.CreateY_plot(y_plot, temp)
+            oled_display.fill(0)
+            pico_tools.DispPlot(oled_display, y_plot )
+            oled_display.text( str(str(temp)+"C") , 30,30)
+            oled_display.show()
         
+        utime.sleep(5)
         start = time.ticks_ms()
         for progress in range(101):
             pico_tools.DrawProgressBar2(oled_display, 20,20, 60, 30, progress/100)
