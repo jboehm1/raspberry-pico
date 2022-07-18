@@ -51,7 +51,7 @@ Jean Boehm [@jboehm1](https://github.com/jboehm1) All rights reserved
 
 This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
 
-## Ressources
+## Bibliography
 
 Inspiration, code snippets, etc.
 * [build a weather station with pico](https://www.youtube.com/watch?v=vfp0B1IW7yI&list=LL&index=2&ab_channel=WexterHome) ( using "def" and main() )
