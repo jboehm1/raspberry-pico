@@ -1,4 +1,4 @@
-# raspberry-pico Project
+# Project raspberry-pico 
 
 First development, aiming to automate fan speed depending on temperature.
 
@@ -25,7 +25,7 @@ Getting familiar with the hardware and software. Implementation of a python tool
 ```
 code blocks for commands
 ```
-<img src="raspberry-pi-pico-gpio.png" align="right" width="500" height="300"/>
+<img src="raspberry-pi-pico-gpio.png" width="500" height="300"/>
 
 ## Help
 
