@@ -19,6 +19,7 @@ Getting familiar with the hardware and software. Implementation of a python tool
 2. Copy the .uf2 binary on the device
 3. Use instructions from [Bibliography(2.)](https://www.electroniclinic.com/raspberry-pi-pico-rp2040-programming-in-micropython-with-examples/) to install modules if needed (OLED Display eg.)
 4. install Thonny (available from /ressources)
+5. In Thonny, in tabs "Run" > Select Interpreter , select raspberry pico as interpreter
 
 ### Executing program
 
